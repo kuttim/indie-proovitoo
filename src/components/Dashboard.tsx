@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import PocketBase from 'pocketbase';
+import { useNavigate } from 'react-router-dom';
 
 interface Message {
     id: string;
@@ -14,12 +15,22 @@ const Dashboard = () => {
     const [messages, setMessages] = useState<Message[]>([]);
     const [newMessage, setNewMessage] = useState('');
 
+    const navigate = useNavigate();
+
     const pb = new PocketBase('https://aloof-zettabyte.pockethost.io');
 
     const currentUser = pb.authStore.model?.email;
     const relationId = pb.authStore.model?.id;
+    const isAuthenticated = pb.authStore.isValid;
 
     useEffect(() => {
+        /**
+         * If Pocketbase auth token is invalid/missing, redirect to login page.
+         */
+        console.log(isAuthenticated);
+        if (!isAuthenticated) {
+            navigate('/login');
+        }
         // fetch all messages
         async function fetchMessages() {
             const messages = (await pb.collection('messages').getFullList({
@@ -31,7 +42,7 @@ const Dashboard = () => {
         }
 
         fetchMessages();
-    }, []);
+    }, [isAuthenticated]);
 
     const handleNewMessageChange = (
         e: React.ChangeEvent<HTMLTextAreaElement>
