@@ -23,7 +23,7 @@ To access the demo, use the following credentials:
 
 Email: **admin@demo.com**
 
-Password: admin123
+Password: admindemo123
 
 ## Technologies Used
 
