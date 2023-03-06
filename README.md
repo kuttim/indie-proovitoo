@@ -17,9 +17,11 @@ To get started with the project, follow these steps:
     3. Create a new Pocketbase instance.
     4. Run the project using `npm start`
 
-## Demo credentials
+## Accessing the Pocketbase UI
 
-To access the demo, use the following credentials:
+To access the Pocketbase UI:
+
+Navigate to [Pocketbase hosted instance](https://aloof-zettabyte.pockethost.io/_).
 
 Email: **admin@demo.com**
 
